@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
 from datetime import datetime
 
 # Create your views here.
@@ -7,32 +7,35 @@ from datetime import datetime
 
 posts = [
     {
-        'name': 'Mont blac',
-        'user': 'Yessica Cortez',
+        'title':'Mont blac',
+        'user': {
+            'name': 'Yésica Cortes',
+            'picture': 'http://picsum.photos/60/60/?image=1027' 
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hs'),
-        'picture': 'http://picsum.photos/200/200/?image=1030'
+        'photo': 'http://picsum.photos/200/200/?image=1036'
+    },
+      {
+        'title':'Via Lactea',
+        'user': {
+            'name': 'Christian v.Hesent',
+            'picture': 'http://picsum.photos/60/60/?image=1005' 
+        },
+        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hs'),
+        'photo': 'http://picsum.photos/200/200/?image=903'
     },
     {
-        'name': 'Via Láctea',
-        'user': 'C. Vander',
+        'title':'Nuevo auditorio',
+        'user': {
+            'name': 'Uriel',
+            'picture': 'http://picsum.photos/60/60/?image=883' 
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hs'),
-        'picture': 'http://picsum.photos/200/200/?image=903'
-    },
-    {
-        'name': 'Nuevo auditorio',
-        'user': 'Thespianartist',
-        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hs'),
-        'picture': 'http://picsum.photos/200/200/?image=1077'
+        'photo': 'http://picsum.photos/200/200/?image=1076'
     }
 ]
 
 def list_post(request):
     """listando post existentes"""
-    content = []
-    for post in posts:
-        content.append("""
-            <p><strong>{name}</strong></p>
-            <p><small>{user} - <i>{timestamp}</i></small></p>
-            <p><figure><img src="{picture}"></figure></p>
-            """.format(**post))
-    return HttpResponse('<br>'.join(content))
+    
+    return  render(request, 'feed.html', {'posts': posts})
