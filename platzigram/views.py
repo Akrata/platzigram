@@ -29,7 +29,7 @@ def sort_int(request):
 
 
 def say_hi(request, name, age):
-    if age < 12:
+    if age < 15:
         message = 'Perdon {}, no puedes ingresar aqui por tu edad'.format(name)
     else:
         message = 'Hola {}, bienvenido'.format(name)
